@@ -1,0 +1,299 @@
+@import "../dashboard/dashboard.css";
+
+/* =====================================================
+   SIMULATED PAGE HEADER
+===================================================== */
+.sim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.sim-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.sim-header p {
+    color: #94a3b8;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+/* =====================================================
+   CHANNEL GRID
+===================================================== */
+.sim-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+/* =====================================================
+   CHANNEL CARD
+===================================================== */
+.sim-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 22px;
+    padding: 28px;
+    transition: 0.35s;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.sim-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(79, 70, 229, 0.2);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.sim-card-icon {
+    font-size: 44px;
+    line-height: 1;
+}
+
+.sim-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.sim-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.sim-card-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sim-meta-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sim-card-preview {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.sim-card-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.sim-card-preview th {
+    padding: 8px 12px;
+    background: rgba(79, 70, 229, 0.2);
+    color: #94a3b8;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sim-card-preview td {
+    padding: 8px 12px;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.sim-card-preview tr:last-child td {
+    border-bottom: none;
+}
+
+/* =====================================================
+   IMPORT BUTTON
+===================================================== */
+.sim-import-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sim-import-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.sim-import-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.4);
+}
+
+/* Color variants */
+.sim-btn-support {
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    color: #fff;
+}
+
+.sim-btn-appstore {
+    background: linear-gradient(90deg, #06b6d4, #0891b2);
+    color: #fff;
+}
+
+.sim-btn-survey {
+    background: linear-gradient(90deg, #10b981, #059669);
+    color: #fff;
+}
+
+.sim-btn-sales {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    color: #fff;
+}
+
+/* =====================================================
+   TOAST / RESULT BANNERS
+===================================================== */
+.sim-result {
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeSlideIn 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.sim-result-success {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+}
+
+.sim-result-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+}
+
+/* =====================================================
+   STATS ROW
+===================================================== */
+.sim-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-bottom: 32px;
+}
+
+.sim-stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 20px 24px;
+    transition: 0.3s;
+}
+
+.sim-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.15);
+}
+
+.sim-stat-card h5 {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.sim-stat-card h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 768px) {
+    .sim-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── UNIQUE: Simulated Channels — teal/emerald accent ── */
+.sim-header {
+    position: relative;
+    padding-bottom: 20px;
+}
+.sim-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, #0d9488, transparent);
+    border-radius: 2px;
+}
+.sim-header h1 {
+    background: linear-gradient(90deg, #f1f5f9 60%, #5eead4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    letter-spacing: -.5px;
+}
+.sim-card {
+    position: relative;
+}
+.sim-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(13,148,136,.4), transparent);
+    border-radius: 22px 22px 0 0;
+}
+.sim-card:hover {
+    border-color: rgba(13,148,136,.25);
+    box-shadow: 0 20px 45px rgba(13,148,136,.12);
+}
+.sim-stat-card {
+    position: relative;
+    overflow: hidden;
+}
+.sim-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(13,148,136,.3), transparent);
+}
+.sim-stat-card h2 { font-weight: 900; letter-spacing: -1px; }

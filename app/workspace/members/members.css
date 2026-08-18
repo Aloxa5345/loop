@@ -1,0 +1,250 @@
+/* =====================================================
+   USERS / MEMBERS PAGE
+===================================================== */
+
+/* ── Page header ── */
+.mem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.mem-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+.mem-header p {
+    font-size: 14px;
+    color: #475569;
+    margin-top: 4px;
+}
+.mem-role-badge {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #06b6d4, #7c3aed);
+    color: #fff;
+    letter-spacing: .03em;
+}
+
+/* ── Panel wrapper ── */
+.mem-panel {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    padding: 24px 28px;
+}
+
+/* ── Toolbar ── */
+.mem-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.mem-count {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 600;
+}
+
+/* ── Error banner ── */
+.mem-error {
+    background: rgba(239,68,68,.1);
+    border: 1px solid rgba(239,68,68,.25);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: #fca5a5;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* ── Table ── */
+.mem-table-wrap {
+    overflow-x: auto;
+}
+.mem-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.mem-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: rgba(79,70,229,.12);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.mem-table th:first-child { border-radius: 8px 0 0 8px; }
+.mem-table th:last-child  { border-radius: 0 8px 8px 0; }
+
+.mem-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    font-size: 14px;
+    color: #cbd5e1;
+    vertical-align: middle;
+}
+.mem-table tr:last-child td { border-bottom: none; }
+.mem-table tr:hover td { background: rgba(255,255,255,.025); }
+.mem-table tr.mem-row-busy td { opacity: .55; }
+
+/* ── Name cell ── */
+.mem-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.mem-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    letter-spacing: .02em;
+}
+.mem-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+.mem-you {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(6,182,212,.12);
+    color: #22d3ee;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+/* ── Other cells ── */
+.mem-email { color: #64748b; font-size: 13px; }
+.mem-date  { color: #475569; font-size: 12px; white-space: nowrap; }
+
+/* ── Actions cell ── */
+.mem-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+.mem-role-select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.06);
+    color: #e2e8f0;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: .2s;
+}
+.mem-role-select:hover:not(:disabled) {
+    border-color: #06b6d4;
+    background: rgba(6,182,212,.08);
+}
+.mem-role-select:disabled { opacity: .4; cursor: not-allowed; }
+.mem-role-select option { background: #0f172a; color: #e2e8f0; }
+
+.mem-remove-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(239,68,68,.25);
+    background: rgba(239,68,68,.08);
+    color: #fca5a5;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+    white-space: nowrap;
+}
+.mem-remove-btn:hover:not(:disabled) {
+    background: rgba(239,68,68,.18);
+    border-color: rgba(239,68,68,.5);
+    color: #f87171;
+}
+.mem-remove-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── Empty state ── */
+.mem-empty {
+    text-align: center;
+    padding: 48px 24px;
+    color: #475569;
+    font-size: 14px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .mem-table th:nth-child(4),
+    .mem-table td:nth-child(4) { display: none; }
+    .mem-panel { padding: 16px; }
+}
+@media (max-width: 540px) {
+    .mem-table th:nth-child(2),
+    .mem-table td:nth-child(2) { display: none; }
+}
+
+/* ── UNIQUE: Members page — purple accent ── */
+.mem-header {
+    position: relative;
+    padding-bottom: 18px;
+}
+.mem-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, #7c3aed, transparent);
+    border-radius: 2px;
+}
+.mem-header h1 {
+    background: linear-gradient(90deg, #f1f5f9 60%, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.mem-panel {
+    position: relative;
+    overflow: hidden;
+}
+.mem-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,.3), transparent);
+}
+.mem-table th {
+    background: rgba(124,58,237,.15);
+    color: #c4b5fd;
+}
+.mem-avatar {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    box-shadow: 0 2px 8px rgba(124,58,237,.3);
+}
+.mem-role-select:hover:not(:disabled) {
+    border-color: #7c3aed;
+    background: rgba(124,58,237,.08);
+}

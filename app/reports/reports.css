@@ -1,0 +1,683 @@
+@import "../dashboard/dashboard.css";
+
+/* =====================================================
+   REPORTS PAGE
+===================================================== */
+.rpt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.rpt-header h1 { font-size: 32px; font-weight: 700; }
+.rpt-header p  { color: #94a3b8; margin-top: 4px; font-size: 15px; }
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+.rpt-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+.rpt-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 22px 24px;
+    transition: .3s;
+}
+.rpt-stat:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(79,70,229,.2); }
+.rpt-stat h5 { font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.rpt-stat h2 { font-size: 38px; font-weight: 700; color: #fff; }
+.rpt-stat.positive h2 { color: #4ade80; }
+.rpt-stat.neutral  h2 { color: #fbbf24; }
+.rpt-stat.negative h2 { color: #f87171; }
+
+/* =====================================================
+   SECTION WRAPPER
+===================================================== */
+.rpt-section {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+}
+.rpt-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =====================================================
+   SCHEDULE FORM
+===================================================== */
+.rpt-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.rpt-field label {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 7px;
+}
+.rpt-input, .rpt-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    outline: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    color: #e2e8f0;
+    font-size: 14px;
+    font-family: inherit;
+    transition: .25s;
+}
+.rpt-input:focus, .rpt-select:focus { border-color: #06b6d4; background: rgba(6,182,212,0.06); }
+.rpt-input::placeholder { color: #475569; }
+.rpt-select option { background: #0f172a; }
+
+/* =====================================================
+   SCHEDULE TABLE
+===================================================== */
+.rpt-schedule-table { width: 100%; border-collapse: collapse; }
+.rpt-schedule-table th {
+    padding: 12px 16px;
+    background: rgba(79,70,229,0.25);
+    color: #c7d2fe;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.rpt-schedule-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #cbd5e1;
+    font-size: 13px;
+}
+.rpt-schedule-table tr:last-child td { border-bottom: none; }
+.rpt-schedule-table tr:hover td    { background: rgba(255,255,255,0.02); }
+
+/* =====================================================
+   PRINT STYLES — PDF via browser print
+===================================================== */
+@media print {
+    .sidebar, .rpt-header .btn, .rpt-no-print,
+    .menu-logout, nav, .fb-add-btn { display: none !important; }
+    body, .dashboard, .main { background: #fff !important; color: #000 !important; }
+    .rpt-stat, .rpt-section { border: 1px solid #ddd !important; background: #f9f9f9 !important; }
+    .main { margin-left: 0 !important; width: 100% !important; }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 768px) {
+    .rpt-stats  { grid-template-columns: 1fr 1fr; }
+    .rpt-form-grid { grid-template-columns: 1fr; }
+    .rpt-schedule-table { display: block; overflow-x: auto; }
+}
+
+/* =====================================================
+   VOC REPORT — shared section wrapper
+===================================================== */
+.voc-section {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+}
+.voc-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.voc-empty {
+    color: #475569;
+    font-size: 14px;
+}
+
+/* =====================================================
+   VOC — Executive Summary stat cards
+===================================================== */
+.voc-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+.voc-stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+    transition: .25s;
+}
+.voc-stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.voc-stat-icon  { font-size: 22px; display: block; margin-bottom: 6px; }
+.voc-stat-label { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+.voc-stat-value { font-size: 26px; font-weight: 800; }
+
+.voc-insight-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(6,182,212,.08), rgba(79,70,229,.08));
+    border: 1px solid rgba(6,182,212,.2);
+    border-radius: 14px;
+    padding: 16px 20px;
+}
+.voc-insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.voc-insight-text { font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+
+/* =====================================================
+   VOC — Theme table
+===================================================== */
+.voc-theme-table  { display: flex; flex-direction: column; gap: 0; }
+.voc-theme-header {
+    display: grid;
+    grid-template-columns: 32px 1fr 80px 50px 1fr;
+    gap: 12px;
+    padding: 8px 4px;
+    font-size: 11px;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    margin-bottom: 4px;
+}
+.voc-theme-row {
+    display: grid;
+    grid-template-columns: 32px 1fr 80px 50px 1fr;
+    gap: 12px;
+    padding: 11px 4px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    transition: .15s;
+}
+.voc-theme-row:hover   { background: rgba(255,255,255,.03); border-radius: 8px; }
+.voc-theme-row:last-child { border-bottom: none; }
+.voc-theme-rank  { font-size: 12px; color: #475569; font-weight: 700; }
+.voc-theme-name  { font-size: 14px; font-weight: 600; }
+.voc-theme-count { font-size: 14px; color: #94a3b8; }
+.voc-theme-trend { font-size: 18px; font-weight: 700; text-align: center; }
+.voc-theme-bar-wrap {
+    height: 6px;
+    background: rgba(255,255,255,.06);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.voc-theme-bar {
+    height: 100%;
+    border-radius: 10px;
+    transition: width .6s ease;
+}
+
+/* =====================================================
+   VOC — Sentiment breakdown
+===================================================== */
+.voc-sentiment-bar {
+    display: flex;
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    gap: 2px;
+}
+.voc-sentiment-segment { height: 100%; transition: width .6s ease; }
+.voc-sentiment-legend  { display: flex; flex-direction: column; gap: 10px; }
+.voc-sentiment-legend-row {
+    display: grid;
+    grid-template-columns: 12px 90px 1fr 44px 60px;
+    gap: 10px;
+    align-items: center;
+}
+.voc-sentiment-dot   { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.voc-sentiment-label { font-size: 13px; color: #94a3b8; }
+.voc-sentiment-track {
+    height: 6px;
+    background: rgba(255,255,255,.06);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.voc-sentiment-fill  { height: 100%; border-radius: 10px; transition: width .6s ease; }
+.voc-sentiment-pct   { font-size: 13px; font-weight: 700; text-align: right; }
+.voc-sentiment-n     { font-size: 11px; color: #475569; }
+
+/* =====================================================
+   VOC — Customer quotes
+===================================================== */
+.voc-quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+.voc-quote-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 16px 18px;
+    transition: .2s;
+}
+.voc-quote-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.voc-quote-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.voc-quote-icon     { font-size: 16px; }
+.voc-quote-customer { font-size: 12px; color: #94a3b8; font-weight: 600; }
+.voc-quote-channel  { font-size: 11px; color: #475569; margin-left: auto; }
+.voc-quote-badge    { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+.voc-quote-text     { font-size: 13px; color: #cbd5e1; line-height: 1.6; font-style: italic; }
+
+/* =====================================================
+   VOC — Recommendations
+===================================================== */
+.voc-recs-list { display: flex; flex-direction: column; gap: 10px; }
+.voc-rec-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 12px;
+    transition: .15s;
+}
+.voc-rec-row:hover { background: rgba(255,255,255,.06); }
+.voc-rec-priority {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.voc-rec-action { flex: 1; font-size: 14px; color: #cbd5e1; line-height: 1.5; }
+.voc-rec-count  { font-size: 12px; color: #475569; white-space: nowrap; }
+
+/* =====================================================
+   VOC — Keywords
+===================================================== */
+.voc-keyword-chip {
+    background: rgba(6,182,212,.1);
+    color: #22d3ee;
+    border: 1px solid rgba(6,182,212,.2);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: 500;
+}
+
+/* =====================================================
+   VOC — Channel grid
+===================================================== */
+.voc-channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+.voc-channel-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+.voc-channel-name  { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 6px; }
+.voc-channel-count { font-size: 24px; font-weight: 800; color: #e2e8f0; }
+
+/* =====================================================
+   VOC — Saved reports list (on /reports)
+===================================================== */
+.voc-saved-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 14px;
+    transition: .2s;
+}
+.voc-saved-row:hover { background: rgba(255,255,255,.06); border-color: rgba(6,182,212,.2); }
+.voc-saved-icon {
+    font-size: 22px;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: rgba(79,70,229,.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.voc-saved-title { font-size: 14px; font-weight: 600; color: #e2e8f0; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.voc-saved-meta  { font-size: 12px; color: #475569; }
+.voc-saved-btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(6,182,212,.25);
+    border-radius: 8px;
+    background: rgba(6,182,212,.07);
+    color: #22d3ee;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: .15s;
+}
+.voc-saved-btn:hover { background: rgba(6,182,212,.15); border-color: rgba(6,182,212,.5); }
+
+/* =====================================================
+   VOC — Print / PDF overrides
+===================================================== */
+@media print {
+    .voc-section { border: 1px solid #ddd !important; background: #f9f9f9 !important; break-inside: avoid; }
+    .voc-stat-card { border: 1px solid #eee !important; background: #fff !important; }
+    .voc-quote-card { border: 1px solid #eee !important; background: #fff !important; }
+    .voc-rec-row { border: 1px solid #eee !important; background: #fff !important; }
+    .voc-theme-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .voc-sentiment-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .voc-sentiment-segment { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .voc-saved-row { display: none !important; }
+}
+
+/* =====================================================
+   VOC — Responsive
+===================================================== */
+@media (max-width: 768px) {
+    .voc-stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .voc-theme-header,
+    .voc-theme-row { grid-template-columns: 28px 1fr 60px 40px; }
+    .voc-theme-bar-wrap { display: none; }
+    .voc-sentiment-legend-row { grid-template-columns: 12px 80px 1fr 40px; }
+    .voc-sentiment-n { display: none; }
+    .voc-quotes-grid { grid-template-columns: 1fr; }
+    .voc-saved-row { flex-wrap: wrap; }
+}
+
+/* =====================================================
+   VOC — Health ring (Executive Summary)
+===================================================== */
+.voc-summary-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.voc-summary-row .voc-stat-grid {
+    flex: 1;
+    margin-bottom: 0;
+}
+.voc-health-ring-wrap {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+.voc-health-ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+.voc-health-score {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+}
+.voc-health-text {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-top: 2px;
+}
+
+/* =====================================================
+   VOC — AI Summary bullets
+===================================================== */
+.voc-ai-summary {
+    background: linear-gradient(135deg,rgba(79,70,229,.08),rgba(124,58,237,.08));
+    border: 1px solid rgba(124,58,237,.2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: 4px;
+}
+.voc-ai-summary-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #a5b4fc;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+.voc-ai-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.voc-ai-summary-list li {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+}
+.voc-ai-summary-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: #7c3aed;
+    font-weight: 700;
+}
+
+/* =====================================================
+   VOC — Star ratings on quotes
+===================================================== */
+.voc-stars { display: inline-flex; gap: 1px; margin-right: 4px; }
+
+/* =====================================================
+   VOC — ReportHeader
+===================================================== */
+.voc-report-header { display: flex; flex-direction: column; gap: 4px; }
+.voc-report-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+.voc-report-workspace { color: #6366f1; }
+.voc-report-sep       { color: #334155; }
+.voc-report-period    { color: #475569; }
+.voc-report-title     { font-size: 26px; font-weight: 800; color: #f1f5f9; margin: 4px 0 2px; }
+.voc-report-meta      { font-size: 13px; color: #475569; margin: 0; }
+
+/* =====================================================
+   VOC — SummaryCards (compact dashboard strip)
+===================================================== */
+.voc-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+}
+.voc-summary-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: .2s;
+}
+.voc-summary-card:hover { transform: translateY(-2px); }
+.voc-summary-card-icon  { font-size: 20px; display: block; margin-bottom: 5px; }
+.voc-summary-card-label { font-size: 10px; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+.voc-summary-card-value { font-size: 22px; font-weight: 800; }
+
+/* =====================================================
+   VOC — Sentiment period-over-period changes
+===================================================== */
+.voc-sent-changes {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+.voc-sent-changes-title {
+    font-size: 11px;
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+}
+.voc-sent-change-row {
+    display: grid;
+    grid-template-columns: 10px 70px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.voc-sent-change-row:last-child { border-bottom: none; }
+.voc-sent-dot         { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.voc-sent-change-label { font-size: 13px; color: #94a3b8; }
+.voc-sent-change-pct   { font-size: 13px; font-weight: 700; text-align: right; }
+.voc-sent-change-trend { font-size: 13px; font-weight: 700; white-space: nowrap; }
+
+/* =====================================================
+   VOC — Sparkline trend chart
+===================================================== */
+.voc-sparkline-wrap {
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.06);
+}
+.voc-sparkline-title {
+    font-size: 11px;
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 8px;
+}
+.voc-sparkline-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #334155;
+    height: 40px;
+    padding: 2px 0;
+    gap: 0;
+}
+
+/* =====================================================
+   VOC — Print additions
+===================================================== */
+@media print {
+    .voc-report-header h1 { color: #000 !important; }
+    .voc-report-eyebrow, .voc-report-meta { color: #555 !important; }
+    .voc-summary-card { border: 1px solid #ddd !important; background: #f9f9f9 !important; }
+    .voc-sent-changes { border: 1px solid #eee !important; background: #fff !important; }
+    .voc-sparkline-wrap svg polyline { stroke: #16a34a !important; }
+}
+
+/* =====================================================
+   VOC — Responsive additions
+===================================================== */
+@media (max-width: 768px) {
+    .voc-summary-cards { grid-template-columns: repeat(3, 1fr); }
+    .voc-sent-change-row { grid-template-columns: 10px 60px 1fr auto; }
+    .voc-report-title { font-size: 20px; }
+}
+
+/* ── UNIQUE: Reports page — amber/gold accent identity ── */
+.rpt-header {
+    position: relative;
+    padding-bottom: 20px;
+}
+.rpt-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, #f59e0b, transparent);
+    border-radius: 2px;
+}
+.rpt-header h1 {
+    background: linear-gradient(90deg, #f1f5f9 60%, #fcd34d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    letter-spacing: -.5px;
+}
+.rpt-stat {
+    position: relative;
+    overflow: hidden;
+}
+.rpt-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,158,11,.4), transparent);
+}
+.rpt-stat:hover {
+    border-color: rgba(245,158,11,.25);
+    box-shadow: 0 14px 30px rgba(245,158,11,.1);
+}
+.rpt-stat h2 { font-weight: 900; letter-spacing: -1px; }
+.rpt-section {
+    position: relative;
+    overflow: hidden;
+}
+.rpt-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,158,11,.2), transparent);
+}
+.voc-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,158,11,.2), transparent);
+}
