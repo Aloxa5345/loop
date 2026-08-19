@@ -18,7 +18,7 @@ export default async function WorkspaceSettingsPage() {
 
     const workspaceId = session.user.workspaceId;
 
-    let workspace: {
+    type WorkspaceData = {
         id: string;
         name: string;
         description: string | null;
@@ -28,15 +28,30 @@ export default async function WorkspaceSettingsPage() {
         ownerId: string;
         createdAt: Date;
         _count: { members: number; feedbacks: number; reports: number };
-    } | null = null;
+    };
+
+    let workspace: WorkspaceData | null = null;
     let members: { id: string; userId: string; name: string; email: string; role: string; joinedAt: string }[] = [];
     let dbError = false;
 
     try {
-        workspace = await prisma.workspace.findUnique({
+        const raw = await prisma.workspace.findUnique({
             where: { id: workspaceId },
             include: { _count: { select: { members: true, feedbacks: true, reports: true } } },
-        }) as typeof workspace;
+        });
+        if (raw) {
+            workspace = {
+                id: raw.id,
+                name: raw.name,
+                description: raw.description,
+                logo: raw.logo ?? null,
+                industry: raw.industry ?? null,
+                timezone: raw.timezone ?? null,
+                ownerId: raw.ownerId,
+                createdAt: raw.createdAt,
+                _count: raw._count,
+            };
+        }
 
         const memberships = await prisma.workspaceMember.findMany({
             where: { workspaceId },
