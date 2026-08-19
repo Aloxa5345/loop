@@ -41,7 +41,10 @@ export default async function FeedbackDetailPage({ params }: Props) {
 
     const { id } = await params;
 
-    let feedback: Awaited<ReturnType<typeof prisma.feedback.findFirst>> | null = null;
+    let feedback: Awaited<ReturnType<typeof prisma.feedback.findFirst<{
+        where: { id: string; workspaceId: string };
+        include: { user: { select: { name: true; email: true } } };
+    }>>> | null = null;
     try {
         feedback = await prisma.feedback.findFirst({
             where: { id, workspaceId: session.user.workspaceId },

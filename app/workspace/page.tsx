@@ -18,7 +18,17 @@ export default async function WorkspacePage() {
 
     const role = session.user.role as RoleKey;
 
-    let memberships: Awaited<ReturnType<typeof prisma.workspaceMember.findMany>> = [];
+    type MembershipWithWorkspace = Awaited<ReturnType<typeof prisma.workspaceMember.findMany<{
+        include: {
+            workspace: {
+                include: {
+                    owner: { select: { id: true; name: true } };
+                    _count: { select: { members: true; feedbacks: true } };
+                };
+            };
+        };
+    }>>>;
+    let memberships: MembershipWithWorkspace = [];
     try {
         memberships = await prisma.workspaceMember.findMany({
             where: { userId: session.user.id },
