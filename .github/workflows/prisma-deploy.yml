@@ -4,17 +4,18 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "prisma/migrations/**"
+      - "prisma/schema.prisma"
+      - ".github/workflows/prisma-deploy.yml"
   workflow_dispatch:
 
 jobs:
-  deploy:
+  prisma-migrate:
     runs-on: ubuntu-latest
 
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -31,3 +32,10 @@ jobs:
 
       - name: Prisma Generate
         run: npx prisma generate --schema=prisma/schema.prisma
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Prisma Migrate Deploy
+        run: npx prisma migrate deploy --schema=prisma/schema.prisma
+        env:
+          DATABASE_URL: ${{ secrets.DIRECT_URL }}
