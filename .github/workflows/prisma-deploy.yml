@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  prisma-migrate:
+  prisma-generate:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,22 +26,7 @@ jobs:
       - name: Remove auto-generated Prisma config
         run: rm -f prisma.config.js prisma.config.ts prisma.config.mjs
 
-      - name: Check DATABASE_URL
-        run: |
-          if [ -z "$DATABASE_URL" ]; then
-            echo "ERROR: DATABASE_URL is missing or empty"
-            exit 1
-          fi
-          echo "DATABASE_URL is configured"
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
       - name: Prisma Generate
         run: npx prisma generate --schema=prisma/schema.prisma
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Prisma Migrate Deploy
-        run: npx prisma migrate deploy --schema=prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
