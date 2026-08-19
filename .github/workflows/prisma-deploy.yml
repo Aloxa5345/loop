@@ -31,6 +31,3 @@ jobs:
 
       - name: Prisma Generate
         run: npx prisma generate --schema=prisma/schema.prisma
-
-      - name: Deploy Prisma migrations
-        run: npx prisma migrate deploy --schema=prisma/schema.prisma
