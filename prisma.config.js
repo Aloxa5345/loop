@@ -1,5 +1,5 @@
 require("dotenv/config");
-const { defineConfig, env } = require("prisma/config");
+const { defineConfig } = require("prisma/config");
 
 module.exports = defineConfig({
     schema: "prisma/schema.prisma",
@@ -7,7 +7,4 @@ module.exports = defineConfig({
         path: "prisma/migrations",
     },
     engine: "classic",
-    datasource: {
-        url: env("DATABASE_URL"),
-    },
 });
